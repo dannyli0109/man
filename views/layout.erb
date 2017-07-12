@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <!-- <link rel='stylesheet' href='/stylesheets/main.css'> -->
+
+  <style>
+  .graybox {
+    background-color:#ddd;
+  }
+
+  .container {
+    position: relative;
+    width: 200px;
+  }
+
+  .background {
+    width: 100%;
+    text-align: center;
+    height: 90%;
+    font-weight: bold;
+    color: white;
+    padding-top: 30vh;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+
+  .wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    right: 16px;
+  }
+
+  .mdl-layout__drawer-button, .mdl-layout__drawer{
+    left: initial;
+    right: 0;
+  }
+
+  .mdl-layout__drawer{
+    transform:translateX(250px);
+    color: black;
+  }
+
+  .demo-layout-transparent .mdl-layout__header,
+  .demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+    your background is light. */
+    color: white;
+  }
+
+  .material-icons {
+    color: black;
+  }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title" style="transform:translateX(-50px);"><a href="/" style="color: white; text-decoration: none;"><img src="/CHECKMATE.png" alt=""></a></span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+
+      </div>
+    </header>
+    <div class="mdl-layout__drawer" style="padding: 0">
+      <span class="mdl-layout-title"><img src="/CHECKMATE.png" alt=""></span>
+      <nav class="mdl-navigation">
+        <% if logged_in? %>
+        <p class="mdl-navigation__link" style="color: black; font-weight: bold;"><%=User.find(session["user_id"]).email%></p>
+        <form action="/session" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button class="mdl-navigation__link" style="color: red; ont-weight: bold;">Log out</button>
+          <hr style="margin: 0;">
+
+        </form>
+        <% end %>
+
+
+        <a class="mdl-navigation__link" href="" style="color: black; font-weight: bold;">Educate +</a>
+        <hr style="margin: 0;">
+
+        <a class="mdl-navigation__link" href="" style="color: black; font-weight: bold;">Engage +</a>
+        <a class="mdl-navigation__link" href="">Join Meetups</a>
+        <a class="mdl-navigation__link" href="">Mentors</a>
+        <a class="mdl-navigation__link" href="">Classes</a>
+        <a class="mdl-navigation__link" href="">Talk</a>
+        <hr style="margin: 0;">
+
+
+        <a class="mdl-navigation__link" href="" style="color: black; font-weight: bold;">Empower +</a>
+        <a class="mdl-navigation__link" href="">Tell your Story</a>
+        <a class="mdl-navigation__link" href="">Become a Mentor</a>
+        <a class="mdl-navigation__link" href="">Start a Meetup</a>
+        <hr style="margin: 0;">
+
+        <a class="mdl-navigation__link" href="" style="color: black; font-weight: bold;">Contact Us</a>
+
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+
+      <%= yield %>
+
+
+    </main>
+
+    <footer class="mdl-mini-footer" style="color: black; background-color: white; justify-content: center; padding-top: 0">
+      <div class="mdl-mini-footer__middle-section">
+        <div class="mdl-logo" style="color: black">
+          <h5>EDUCATE. ENGAGE. EMPOWER</h5>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+  </div>
+
+
+
+
+</body>
+</html>
