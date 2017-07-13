@@ -8,6 +8,38 @@ CREATE TABLE users (
   name VARCHAR(400)
 );
 
+CREATE TABLE questions (
+  id SERIAL4 PRIMARY KEY,
+  question VARCHAR(400)
+);
+
+INSERT INTO questions(question) VALUES ('Within the last week, how often did you feel lonely?');
+
+INSERT INTO questions(question) VALUES ('In what areas would you like to improve?');
+
+INSERT INTO questions(question) VALUES ('In what areas are your interests?');
+
+
+
+
+-- havent put in yet
+CREATE TABLE answers (
+  id SERIAL4 PRIMARY KEY,
+  question_id INTEGER,
+  answer VARCHAR(400)
+);
+
+
+INSERT INTO answers(question_id,answer) VALUES (1,'Not at all');
+INSERT INTO answers(question_id,answer) VALUES (1,'Several Times');
+INSERT INTO answers(question_id,answer) VALUES (1,'Every Day');
+
+INSERT INTO answers(question_id,answer) VALUES (2,'Physical');
+INSERT INTO answers(question_id,answer) VALUES (2,'Emotional');
+INSERT INTO answers(question_id,answer) VALUES (2,'Mental');
+
+
+
 CREATE TABLE hobby_types(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(400)
@@ -34,6 +66,8 @@ CREATE TABLE hobbies(
 
 INSERT INTO hobbies (hobby_type_id, user_id)
 VALUES (2,1);
+INSERT INTO hobbies (hobby_type_id, user_id)
+VALUES (1,1);
 
 
 

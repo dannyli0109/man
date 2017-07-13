@@ -1,13 +1,15 @@
 require 'sinatra'
-require 'sinatra/reloader'
-require 'pry'
-require 'pg'
+# require 'sinatra/reloader'
+# require 'pry'
+# require 'pg'
 require 'httparty'
 
 require_relative 'db_config'
 require_relative 'models/user'
 require_relative 'models/hobby'
 require_relative 'models/hobby_type'
+require_relative 'models/question'
+require_relative 'models/answer'
 
 
 
@@ -56,12 +58,20 @@ get '/dashboard' do
     @hobby_names.each do |hobby_name|
       @results[hobby_name] = HTTParty.get("https://api.meetup.com/find/events?&sign=true&photo-host=public&fields=#{hobby_name}&key=36c7a1934185c6a585a405c166c59a").parsed_response[0..4]
     end
-
-    binding.pry
-
     erb :dashboard
   else
     redirect '/'
+  end
+end
+
+get '/questions/:id' do
+  @id = params[:id]
+  if @id.to_i < 3
+    @answers = Answer.where(question_id: @id)
+    erb :questionaire
+  else
+    @hobby_types = HobbyType.all
+    erb :hobbies
   end
 end
 
@@ -87,7 +97,6 @@ get '/login' do
 end
 
 get '/users/:id' do
-  binding.pry
   redirect "/"
 end
 
@@ -96,7 +105,7 @@ post '/session' do
   user = User.find_by(email:params[:email])
   if user && user.authenticate(params[:password])
     session[:user_id] = user.id
-    redirect "/dashboard"
+    redirect '/questions/1'
   else
     redirect '/'
   end

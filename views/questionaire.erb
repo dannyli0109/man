@@ -1,0 +1,23 @@
+
+
+
+
+
+<div class="mdl-grid">
+  <div class="mdl-layout-spacer"></div>
+  <div class="mdl-cell mdl-cell--4-col" style="text-align: center; margin-top: 20vh">
+
+    <form action="/questions/<%= @id.to_i + 1%>" method="get">
+      <div class="question">
+        <h4><%= Question.find(@id)["question"]%></h4>
+      </div>
+      <% @answers.each do |answer| %>
+      <div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="margin: 5px; width: 100%"><%= answer.answer%></button>
+      </div>
+      <% end %>
+    </form>
+
+  </div>
+  <div class="mdl-layout-spacer"></div>
+</div>
